@@ -24,9 +24,7 @@ export default function TabTwoScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText
           type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
+          style={styles.titleText}>
           Explore
         </ThemedText>
       </ThemedView>
@@ -59,7 +57,7 @@ export default function TabTwoScreen() {
         </ThemedText>
         <Image
           source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
+          style={styles.reactLogo}
         />
         <ExternalLink href="https://reactnative.dev/docs/images">
           <ThemedText type="link">Learn more</ThemedText>
@@ -80,7 +78,7 @@ export default function TabTwoScreen() {
           This template includes an example of an animated component. The{' '}
           <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
           the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
+          <ThemedText type="defaultSemiBold" style={styles.monoText}>
             react-native-reanimated
           </ThemedText>{' '}
           library to create a waving hand animation.
@@ -108,5 +106,16 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  titleText: {
+    fontFamily: Fonts.rounded,
+  },
+  reactLogo: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+  },
+  monoText: {
+    fontFamily: Fonts.mono,
   },
 });

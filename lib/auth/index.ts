@@ -1,5 +1,9 @@
 import { expo } from "@better-auth/expo";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth";
+
+import { db } from "@/lib/db";
+import { account, session, user, verification } from "@/lib/db/schema";
 
 const developmentTrustedOrigins = [
   "http://localhost:8081",
@@ -12,6 +16,15 @@ const developmentTrustedOrigins = [
 ];
 
 export const auth = betterAuth({
+  database: drizzleAdapter(db, {
+    provider: "pg",
+    schema: { user, session, account, verification },
+  }),
+  advanced: {
+    database: {
+      generateId: false,
+    },
+  },
   plugins: [expo()],
   account: {
     storeStateStrategy: "cookie",

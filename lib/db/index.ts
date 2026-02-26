@@ -1,6 +1,18 @@
-/**
- * API routes on Expo web/server runtime cannot use Node-native SQLite modules.
- * This placeholder is intentionally non-functional and kept only to avoid
- * stale import crashes while auth runs in cookie/stateless mode.
- */
-export const authDb = null;
+import { drizzle } from "drizzle-orm/node-postgres";
+
+import { relations } from "@/lib/db/relations";
+import * as schema from "@/lib/db/schema";
+
+export const db = drizzle({
+  connection: {
+    user: process.env.POSTGRES_USER!,
+    password: process.env.POSTGRES_PASSWORD!,
+    host: process.env.POSTGRES_HOST!,
+    port: Number(process.env.POSTGRES_PORT!),
+    database: process.env.POSTGRES_DB!,
+    ssl: process.env.PRODUCTION === "true",
+  },
+  schema,
+  casing: "snake_case",
+  relations,
+});
